@@ -1,6 +1,6 @@
 var connect = require('connect'),
 Path = require('path'),
-docco = require('./lib/docconnect'),
+docco = require('./lib/connect-docco'),
 
 // may one day become a configuration holder
 options = {};
@@ -8,12 +8,12 @@ options = {};
 connect.createServer()
 
     .use(connect.logger())
-    
-    .use(docco(options))
-    
-    .use(connect.directory(Path.join(__dirname)))
 
-    .use(connect.static(Path.join(__dirname)))
+    .use(docco(__dirname, options))
+    
+    .use(connect.directory(__dirname))
+
+    .use(connect.static(__dirname))
     
     .listen(4000);
 

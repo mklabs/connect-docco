@@ -1,0 +1,20 @@
+{
+  "author": "mklabs",
+  "name": "connect-docco",
+  "description": "docco middleware for connect",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mklabs/nocco.git"
+  },
+  "main": "lib/nocco",
+  "engines": {
+    "node": ">= 0.4.1"
+  },
+  "dependencies": {
+    "connect": "1.6.0",
+    "github-flavored-markdown": ">= 0.0.1",
+    "docco": "0.3.0"
+  },
+  "devDependencies": {}
+}

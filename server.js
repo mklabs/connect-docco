@@ -1,20 +1,33 @@
 var connect = require('connect'),
-Path = require('path'),
+path = require('path'),
 docco = require('./lib/connect-docco'),
 
-// may one day become a configuration holder
-options = {};
+// Default configuration object.
+conf = { port: 8082, dirname: __dirname};
 
+// handle command line arguments, if any args is matching port or dirname (as defined in `conf`),
+// overrides the default `conf` object. args are defined using `-port` or `--port` followed by desired value.
+process.argv.slice(2).forEach(function(val, i, arr) {
+  var name = val.replace(/-/g, '');
+  if(!conf[name]) return;
+  conf[name] = arr[i + 1];
+});
+
+// resolve path case we get a new one from the command line
+conf.dirname= path.resolve(conf.dirname);
+
+
+// Create and start a basic connect server setup with the docco middleware preceding directory and static middlewares.
 connect.createServer()
 
     .use(connect.logger())
 
-    .use(docco(__dirname, options))
+    .use(docco(conf.dirname, {}))
     
-    .use(connect.directory(__dirname))
+    .use(connect.directory(conf.dirname))
 
-    .use(connect.static(__dirname))
+    .use(connect.static(conf.dirname))
     
-    .listen(4000);
+    .listen(conf.port);
 
-console.log('Started on localhost:4000');
+console.log('Started on localhost:', conf.port);

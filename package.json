@@ -8,7 +8,7 @@
     "url": "git://github.com/mklabs/nocco.git"
   },
   "bin": "./bin/server",
-  "main": "./server.js",
+  "main": "./lib/connect-docco",
   "engines": {
     "node": ">= 0.4.1"
   },

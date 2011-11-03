@@ -6,26 +6,31 @@ Nothing fancy, the idea is to generate dynamically upon request a docco generate
 
 or simply to get immediate results of docco against local files, which happen to be quite handy.
 
+** New Hot Stuff:** A mix of
+[docco](http://jashkenas.github.com/docco/),
+[socket.io](http://socket.io/) and
+[watch](https://github.com/mikeal/watch). Save files, get immediate results and
+see the docco page updated automatically.
+
 
 ## install
 
     npm install connect-docco
 
-*or if you intend to use the connect-docco bin, you should install
-globally:  `npm install connect-docco -g`
+or if you intend to use the connect-docco bin, you may want to install globally:  `npm install connect-docco -g`
 
 ## usage
 
-##### cli
+### cli
 
     connect-docco --port 5678 --dirname ../../any/folder/you/want
 
-command line arguments overides the defaults configuration:
+command line arguments overrides the defaults configuration:
 
 * port: 8082
 * dirname: pwd
 
-##### connect middleware
+### connect middleware
 
 Here is an example of a basic connect server setup using docco
 middleware with logger, static and directory.
@@ -51,4 +56,19 @@ You'll have to append a docco querystring parameter (eg.
 `http://localhost:8082/path/to/js/files.js?docco`) to get the
 output of docco for `path/to/js/files.js`
 
+#### socket.io/watch
 
+The docco middleware, if given an `app` instance (that is the server
+created by express/connect or http.createServer), will walk the dir and
+watch for any file changes. It then emits back to clients the new content
+to display.
+
+
+    connect.createServer()
+      .use(connect.logger())
+      .use(docco(__dirname))
+      .use(connect.directory(__dirname))
+      .use(connect.static(__dirname))
+      .listen(8080);
+
+This is basic, but ends up working pretty well.

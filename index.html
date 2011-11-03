@@ -1,3 +1,77 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>connect-docco :: docco middleware for connect</title>
+  <meta name="description" content="docco middleware for connect ">
+  <meta name="author" content="mklabs">
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    /* HTML5 ✰ Boilerplate
+     * ==|== normalize ==========================================================
+     */
+    article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
+    audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
+    audio:not([controls]) { display: none; }
+    [hidden] { display: none; }
+    html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    body { margin: 0; font-size: 13px; line-height: 1.231; }
+    body, button, input, select, textarea { font-family: sans-serif; color: #222; }
+    ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+    ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+    a { color: #00e; }
+    a:visited { color: #551a8b; }
+    a:hover { color: #06e; }
+    a:focus { outline: thin dotted; }
+    a:hover, a:active { outline: 0; }
+    abbr[title] { border-bottom: 1px dotted; }
+    b, strong { font-weight: bold; }
+    blockquote { margin: 1em 40px; }
+    dfn { font-style: italic; }
+    hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+    ins { background: #ff9; color: #000; text-decoration: none; }
+    mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+    pre, code, kbd, samp { font-family: monospace, monospace; _font-family: 'courier new', monospace; font-size: 1em; }
+    pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+    q { quotes: none; }
+    q:before, q:after { content: ""; content: none; }
+    small { font-size: 85%; }
+    sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+    sup { top: -0.5em; }
+    sub { bottom: -0.25em; }
+    ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
+    dd { margin: 0 0 0 40px; }
+    nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0; }
+    img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
+    svg:not(:root) { overflow: hidden; }
+    figure { margin: 0; }
+    form { margin: 0; }
+    fieldset { border: 0; margin: 0; padding: 0; }
+    label { cursor: pointer; }
+    legend { border: 0; *margin-left: -7px; padding: 0; }
+    button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
+    button, input { line-height: normal; *overflow: visible; }
+    table button, table input { *overflow: auto; }
+    button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; }
+    input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
+    input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
+    input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+    button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+    textarea { overflow: auto; vertical-align: top; resize: vertical; }
+    input:valid, textarea:valid {  }
+    input:invalid, textarea:invalid { background-color: #f0dddd; }
+    table { border-collapse: collapse; border-spacing: 0; }
+    td { vertical-align: top; }
+    /* ==|== primary styles =====================================================
+       Author: 
+       ========================================================================== */
     body {
       padding: 50px;
       color: #8b8b8b;
@@ -26,7 +100,6 @@
     a:focus { outline: thin dotted; }
     a:hover, a:active { outline: 0; }
     .docs { text-align: right }
-
     /** wikistyle,credits to github guys. **/
     p{margin:1em 0 !important;line-height:1.5em !important;}
     a.absent{color:#a00;}
@@ -61,3 +134,91 @@
     .align-left{display:block;text-align:left;}
     .align-center{display:block;text-align:center;}
     .align-right{display:block;text-align:right;}
+    /* ==|== non-semantic helper classes ======================================== */
+    .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
+    .ir br { display: none; }
+    .hidden { display: none !important; visibility: hidden; }
+    .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+    .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+    .invisible { visibility: hidden; }
+    .clearfix:before, .clearfix:after { content: ""; display: table; }
+    .clearfix:after { clear: both; }
+    .clearfix { zoom: 1; }
+    /* ==|== media queries ====================================================== */
+    @media only screen and (min-width: 480px) {
+    }
+    @media only screen and (min-width: 768px) {
+    }
+    /* ==|== print styles ======================================================= */
+    @media print {
+      * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } 
+      a, a:visited { text-decoration: underline; }
+      a[href]:after { content: " (" attr(href) ")"; }
+      abbr[title]:after { content: " (" attr(title) ")"; }
+      .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } 
+      pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+      thead { display: table-header-group; }
+      tr, img { page-break-inside: avoid; }
+      img { max-width: 100% !important; }
+      @page { margin: 0.5cm; }
+      p, h2, h3 { orphans: 3; widows: 3; }
+      h2, h3 { page-break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>connect-docco<h1>
+    <h2>docco middleware for connect</h2>
+  </header>
+  <div role="main">
+          <p class="docs"><a href="docs/connect-docco.html">Moar docs</a></p>
+    <h1>connect-docco</h1>
+
+<p>Bringing the literate programing tool docco as a connect/express middleware.</p>
+
+<p>Nothing fancy, the idea is to generate dynamically upon request a docco generated page from files.</p>
+
+<p>or simply to get immediate results of docco against local files, which happen to be quite handy.</p>
+
+<h2>install</h2>
+
+<pre><code>npm install connect-docco</code></pre>
+
+<p>*or if you intend to use the connect-docco bin, you should install
+globally:  <code>npm install connect-docco -g</code></p>
+
+<h2>usage</h2>
+
+<h5>cli</h5>
+
+<pre><code>connect-docco --port 5678 --dirname ../../any/folder/you/want</code></pre>
+
+<p>command line arguments overides the defaults configuration:</p>
+
+<ul><li>port: 8082</li><li>dirname: pwd</li></ul>
+
+<h5>connect middleware</h5>
+
+<p>Here is an example of a basic connect server setup using docco
+middleware with logger, static and directory.</p>
+
+<pre><code>  connect.createServer()
+    .use(connect.logger())
+    .use(docco(__dirname))
+    .use(connect.directory(__dirname))
+    .use(connect.static(__dirname))
+    .listen(8080);</code></pre>
+
+<p>The middleware handle any docco-compatible extension and <code>next()</code> to the
+directory/static connect layers if the file extension is not one of the
+following:</p>
+
+<ul><li>.coffee</li><li>.js</li><li>.json</li><li>.rb</li><li>.py</li></ul>
+
+<p>You&#39;ll have to append a docco querystring parameter (eg.
+<code>[http://localhost:8082/path/to/js/files.js?docco</code>](http://localhost:8082/path/to/js/files.js?docco<code>)) to get the
+output of docco for </code>path/to/js/files.js`</p>
+  </div>
+</body>
+</html>

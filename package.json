@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mklabs/nocco.git"
+    "url": "git://github.com/mklabs/connect-docco.git"
   },
   "bin": "./bin/server",
   "main": "./lib/connect-docco",
@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "connect": "1.6.0",
-    "github-flavored-markdown": ">= 0.0.1",
-    "docco": "0.3.0"
+    "docco": "0.3.0",
+    "watch": "~0.4.0",
+    "socket.io": "~0.8.6",
+    "markdown": "~0.3.1"
   }
 }

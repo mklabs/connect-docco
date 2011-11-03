@@ -16,17 +16,23 @@ process.argv.slice(2).forEach(function(val, i, arr) {
 // resolve path case we get a new one from the command line
 conf.dirname= path.resolve(conf.dirname);
 
-// Create and start a basic connect server setup with the docco middleware preceding directory and static middlewares.
-connect.createServer()
+// Create and start a basic connect server setup with the docco
+// middleware preceding directory and static middlewares.
+var app = connect.createServer();
 
-    .use(connect.logger())
+app
+  .use(connect.logger())
 
-    .use(docco(conf.dirname, {}))
-    
-    .use(connect.directory(conf.dirname))
+  .use(docco(conf.dirname, {
+    // pass in the app reference, so that we could
+    // add some socket.io sugar
+    app: app
+  }))
 
-    .use(connect.static(conf.dirname))
-    
-    .listen(conf.port);
+  .use(connect.directory(conf.dirname))
+
+  .use(connect.static(conf.dirname))
+
+  .listen(conf.port);
 
 console.log('Serving ', conf.dirname, 'files... Started on localhost:', conf.port);

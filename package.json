@@ -2,7 +2,7 @@
   "author": "mklabs",
   "name": "connect-docco",
   "description": "docco middleware for connect. Mix it with socket.io and watch to get fancy automatic updates.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/mklabs/connect-docco.git"

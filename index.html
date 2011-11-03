@@ -8,8 +8,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>connect-docco :: docco middleware for connect</title>
-  <meta name="description" content="docco middleware for connect ">
+  <title>connect-docco :: docco middleware for connect. Mix it with socket.io and watch to get fancy automatic updates.</title>
+  <meta name="description" content="docco middleware for connect. Mix it with socket.io and watch to get fancy automatic updates. ">
   <meta name="author" content="mklabs">
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -169,7 +169,7 @@
 <body>
   <header>
     <h1>connect-docco<h1>
-    <h2>docco middleware for connect</h2>
+    <h2>docco middleware for connect. Mix it with socket.io and watch to get fancy automatic updates.</h2>
   </header>
   <div role="main">
           <p class="docs"><a href="docs/connect-docco.html">Moar docs</a></p>
@@ -181,24 +181,29 @@
 
 <p>or simply to get immediate results of docco against local files, which happen to be quite handy.</p>
 
+<p><strong> New Hot Stuff:</strong> A mix of
+<a href="[http://jashkenas.github.com/docco/](http://jashkenas.github.com/docco/)">docco</a>,
+<a href="[http://socket.io/](http://socket.io/)">socket.io</a> and
+<a href="[https://github.com/mikeal/watch](https://github.com/mikeal/watch)">watch</a>. Save files, get immediate results and
+see the docco page updated automatically.</p>
+
 <h2>install</h2>
 
 <pre><code>npm install connect-docco</code></pre>
 
-<p>*or if you intend to use the connect-docco bin, you should install
-globally:  <code>npm install connect-docco -g</code></p>
+<p>or if you intend to use the connect-docco bin, you may want to install globally:  <code>npm install connect-docco -g</code></p>
 
 <h2>usage</h2>
 
-<h5>cli</h5>
+<h3>cli</h3>
 
 <pre><code>connect-docco --port 5678 --dirname ../../any/folder/you/want</code></pre>
 
-<p>command line arguments overides the defaults configuration:</p>
+<p>command line arguments overrides the defaults configuration:</p>
 
 <ul><li>port: 8082</li><li>dirname: pwd</li></ul>
 
-<h5>connect middleware</h5>
+<h3>connect middleware</h3>
 
 <p>Here is an example of a basic connect server setup using docco
 middleware with logger, static and directory.</p>
@@ -219,6 +224,22 @@ following:</p>
 <p>You&#39;ll have to append a docco querystring parameter (eg.
 <code>[http://localhost:8082/path/to/js/files.js?docco</code>](http://localhost:8082/path/to/js/files.js?docco<code>)) to get the
 output of docco for </code>path/to/js/files.js`</p>
+
+<h4>socket.io/watch</h4>
+
+<p>The docco middleware, if given an <code>app</code> instance (that is the server
+created by express/connect or http.createServer), will walk the dir and
+watch for any file changes. It then emits back to clients the new content
+to display.</p>
+
+<pre><code>connect.createServer()
+  .use(connect.logger())
+  .use(docco(__dirname))
+  .use(connect.directory(__dirname))
+  .use(connect.static(__dirname))
+  .listen(8080);</code></pre>
+
+<p>This is basic, but ends up working pretty well.</p>
   </div>
 </body>
 </html>

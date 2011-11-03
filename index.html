@@ -69,6 +69,7 @@
     input:invalid, textarea:invalid { background-color: #f0dddd; }
     table { border-collapse: collapse; border-spacing: 0; }
     td { vertical-align: top; }
+
     /* ==|== primary styles =====================================================
        Author: 
        ========================================================================== */
@@ -92,12 +93,51 @@
       font-size: 18px;
       border-bottom: 3px solid #eee;
     }
-    a { color: #00e; text-decoration: none; }
+    h4 { font-size: 16px; }
+    h5 { font-size: 14px; }
+    a { color: #33f; text-decoration: none; }
     a:visited { color: #06e; }
     a:hover { color: #06e; text-decoration: underline; }
     a:focus { outline: thin dotted; }
     a:hover, a:active { outline: 0; }
     .docs { text-align: right }
+
+    /** wikistyle,credits to github guys. **/
+    p{margin:1em 0 !important;line-height:1.5em !important;}
+    a.absent{color:#a00;}
+    ul {margin:1em 0 1em 0.5em !important;}
+    ol {margin:1em 0 1em 0.5em !important;}
+    ul li{margin-top:.5em;margin-bottom:.5em;}
+    ul ul, ul ol, ol ol, ol ul{ margin: 0 !important;}
+    blockquote{margin:1em 0 !important;border-left:5px solid #ddd !important;padding-left:.6em !important;color:#555 !important;}
+    dt{font-weight:bold !important;margin-left:1em !important;}
+    dd{margin-left:2em !important;margin-bottom:1em !important;}
+    table{margin:1em 0 !important;}
+    table{margin:1em 0 !important;}
+    table th{border-bottom:1px solid #bbb !important;padding:.2em 1em !important;}
+    table td{border-bottom:1px solid #ddd !important;padding:.2em 1em !important;}
+    pre{margin:1em 0;font-size:12px;background-color:#eee;border:1px solid #ddd;padding:5px;line-height:1.5em;color:#444;overflow:auto;-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+    pre::-webkit-scrollbar{height:8px;width:8px;}
+    pre::-webkit-scrollbar-track-piece{margin-bottom:10px;background-color:#eee;border-bottom-left-radius:4px 4px;border-bottom-right-radius:4px 4px;border-top-left-radius:4px 4px;border-top-right-radius:4px 4px;}
+    pre::-webkit-scrollbar-thumb:vertical{height:25px;background-color:#ccc;-webkit-border-radius:4px;-webkit-box-shadow:0 1px 1px rgba(255,255,255,1);}
+    pre::-webkit-scrollbar-thumb:horizontal{width:25px;background-color:#ccc;-webkit-border-radius:4px;}
+    a code, a:link code, a:visited code{color:#4183c4 !important;}
+    img{max-width:100%;}
+    pre.console{margin:1em 0 !important;font-size:12px !important;background-color:black !important;padding:.5em !important;line-height:1.5em !important;color:white !important;}
+    pre.console code{padding:0 !important;font-size:12px !important;background-color:black !important;border:none !important;color:white !important;}
+    pre.console span{color:#888 !important;}
+    pre.console span.command{color:yellow !important;}
+    .frame{margin:0;display:inline-block;}
+    .frame img{display:block;}
+    .frame>span{display:block;border:1px solid #aaa;padding:4px;}
+    .frame span span{display:block;font-size:10pt;margin:0;padding:4px 0 2px 0;text-align:center;line-height:10pt;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;}
+    .float-left{float:left;padding:.5em 1em .25em 0;}
+    .float-right{float:right;padding:.5em 0 .25em 1em;}
+    .align-left{display:block;text-align:left;}
+    .align-center{display:block;text-align:center;}
+    .align-right{display:block;text-align:right;}
+
+
     /* ==|== non-semantic helper classes ======================================== */
     .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
     .ir br { display: none; }

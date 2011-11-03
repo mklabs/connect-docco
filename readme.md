@@ -63,12 +63,16 @@ created by express/connect or http.createServer), will walk the dir and
 watch for any file changes. It then emits back to clients the new content
 to display.
 
+    var app = connect.createServer();
 
-    connect.createServer()
+    app
       .use(connect.logger())
-      .use(docco(__dirname))
-      .use(connect.directory(__dirname))
-      .use(connect.static(__dirname))
-      .listen(8080);
+      .use(docco(conf.dirname, {
+        // provides the app reference, so that we could add some socket.io sugar
+        app: app
+      }))
+      .use(connect.directory(conf.dirname))
+      .use(connect.static(conf.dirname))
+      .listen(conf.port);
 
 This is basic, but ends up working pretty well.

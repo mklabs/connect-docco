@@ -24,8 +24,7 @@ app
   .use(connect.logger())
 
   .use(docco(conf.dirname, {
-    // pass in the app reference, so that we could
-    // add some socket.io sugar
+    // provides the app reference, so that we could add some socket.io sugar
     app: app
   }))
 

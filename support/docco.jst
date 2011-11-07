@@ -60,7 +60,7 @@
 
   <script>
     (function() {
-      var socket = io.connect('http://localhost:<%= port %>}'),
+      var socket = io.connect('http://localhost:<%= port %>'),
         container = $('#container');
 
       socket.on('changed', function(file, path, content) {

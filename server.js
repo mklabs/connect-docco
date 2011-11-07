@@ -25,7 +25,11 @@ app
 
   .use(docco(conf.dirname, {
     // provides the app reference, so that we could add some socket.io sugar
-    app: app
+    app: app,
+
+    // also you'll need to give it the running port, this is used to correctly
+    // setup the socket.io client code.
+    port: conf.port
   }))
 
   .use(connect.directory(conf.dirname))

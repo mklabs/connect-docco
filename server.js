@@ -1,6 +1,7 @@
 var connect = require('connect'),
 path = require('path'),
 docco = require('./lib/connect-docco'),
+console = new (require('socket.io/lib/logger'))();
 
 // Default configuration object.
 conf = { port: 8082, dirname: process.cwd()};
@@ -21,7 +22,7 @@ conf.dirname= path.resolve(conf.dirname);
 var app = connect.createServer();
 
 app
-  .use(connect.logger())
+  .use(connect.logger('   serve - :method :url - :referrer'))
 
   .use(docco(conf.dirname, {
     // provides the app reference, so that we could add some socket.io sugar
@@ -38,4 +39,4 @@ app
 
   .listen(conf.port);
 
-console.log('Serving ', conf.dirname, 'files... Started on localhost:', conf.port);
+console.info('Serving ', conf.dirname, 'files... Started on localhost:', conf.port);

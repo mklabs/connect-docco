@@ -60,15 +60,17 @@
 
   <script>
     (function() {
-      var socket = io.connect('http://localhost:<%= port %>'),
-        container = $('#container');
+      var url = 'http://localhost:<%= port %>',
+        socket = io.connect(url),
+        container = $('#container'),
+        notif = $('#notif'),
+        notifUrl = '<a href=":url">:text</a>';
 
       socket.on('changed', function(file, path, content) {
-        console.log('File changed', file, path);
-
         if(location.pathname === path) {
-          console.log('Replacing in ', $('#container'));
           container.html(content);
+        } else {
+          location.assign(url + path);
         }
       });
     })();

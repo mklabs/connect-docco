@@ -2,7 +2,7 @@
   "author": "mklabs",
   "name": "connect-docco",
   "description": "docco middleware for connect. Mix it with socket.io and watch to get fancy automatic updates.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "git://github.com/mklabs/connect-docco.git"
@@ -13,7 +13,7 @@
     "node": ">= 0.4.1"
   },
   "dependencies": {
-    "watch": "https://nodeload.github.com/mklabs/watch",
+    "watch": "https://nodeload.github.com/mklabs/watch/tarball/master",
     "connect": "~1.8.5",
     "socket.io": "~0.8.7"
   }

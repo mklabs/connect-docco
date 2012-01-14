@@ -1,46 +1,79 @@
-<div id="background"></div>
-<% if (sources.length > 1) { %>
-  <div id="jump_to">
-    Jump To &hellip;
-    <div id="jump_wrapper">
-      <div id="jump_page">
-        <% for (var i=0, l=sources.length; i<l; i++) { %>
-          <% var source = sources[i]; %>
-          <a class="source" href="<%= path.basename(destination(source)) %>">
-            <%= path.basename(source) %>
-          </a>
-        <% } %>
-      </div>
-    </div>
-  </div>
-<% } %>
-<table cellpadding="0" cellspacing="0">
-  <thead>
-    <tr>
-      <th class="docs">
-        <h1>
-          <%= title %>
-        </h1>
-      </th>
-      <th class="code">
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <% for (var i=0, l=sections.length; i<l; i++) { %>
-      <% var section = sections[i]; %>
-      <tr id="section-<%= i + 1 %>">
-        <td class="docs">
-          <div class="pilwrap">
-            <a class="pilcrow" href="#section-<%= i + 1 %>">&#182;</a>
-          </div>
-          <%= section.docs_html %>
-        </td>
-        <td class="code">
-          <%= section.code_html %>
-        </td>
-      </tr>
-    <% } %>
-  </tbody>
-</table>
+<!DOCTYPE html>
 
+<html>
+<head>
+  <title><%= title %></title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    <% if (sources.length > 1) { %>
+      <div id="jump_to">
+        Jump To &hellip;
+        <div id="jump_wrapper">
+          <div id="jump_page">
+            <% for (var i=0, l=sources.length; i<l; i++) { %>
+              <% var source = sources[i]; %>
+              <a class="source" href="<%= path.basename(destination(source)) %>">
+                <%= path.basename(source) %>
+              </a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    <% } %>
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="docs">
+            <h1>
+              <%= title %>
+            </h1>
+          </th>
+          <th class="code">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i=0, l=sections.length; i<l; i++) { %>
+          <% var section = sections[i]; %>
+          <tr id="section-<%= i + 1 %>">
+            <td class="docs">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-<%= i + 1 %>">&#182;</a>
+              </div>
+              <%= section.docs_html %>
+            </td>
+            <td class="code">
+              <%= section.code_html %>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script>
+    (function() {
+      var url = 'http://localhost:<%= port %>',
+        socket = io.connect(url),
+        container = $('#container'),
+        notif = $('#notif'),
+        notifUrl = '<a href=":url">:text</a>';
+
+      socket.on('changed', function(file, path, content) {
+        if(location.pathname === path) {
+          container.html(content);
+        } else {
+          location.assign(url + path);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

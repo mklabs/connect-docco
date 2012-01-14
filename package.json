@@ -13,7 +13,7 @@
     "node": ">= 0.4.1"
   },
   "dependencies": {
-    "watch": "https://nodeload.github.com/mklabs/watch/tarball/master",
+    "watch": "https://nodeload.github.com/mklabs/watch/tarball/windows-support",
     "connect": "~1.8.5",
     "socket.io": "~0.8.7"
   }

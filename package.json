@@ -15,6 +15,7 @@
   "dependencies": {
     "watch": "https://nodeload.github.com/mklabs/watch/tarball/windows-support",
     "connect": "~1.8.5",
-    "socket.io": "~0.8.7"
+    "socket.io": "~0.8.7",
+    "markdown": "~0.3.1"
   }
 }

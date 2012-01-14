@@ -1,10 +1,11 @@
 var connect = require('connect'),
-path = require('path'),
-docco = require('./lib/connect-docco'),
-console = new (require('socket.io/lib/logger'))();
+  path = require('path'),
+  docco = require('./lib/connect-docco'),
+  fs = require('fs'),
+  log = new (require('socket.io/lib/logger'))();
 
 // Default configuration object.
-conf = { port: 8082, dirname: process.cwd()};
+var conf = { port: 8082, dirname: process.cwd()};
 
 // handle command line arguments, if any args is matching port or dirname (as defined in `conf`),
 // overrides the default `conf` object. args are defined using `-port` or `--port` followed by desired value.
@@ -39,4 +40,6 @@ app
 
   .listen(conf.port);
 
-console.info('Serving ', conf.dirname, 'files... Started on localhost:', conf.port);
+process.on('uncaughtException', log.error.bind(log));
+
+log.info('Serving ', conf.dirname, 'files... Started on localhost:', conf.port);
